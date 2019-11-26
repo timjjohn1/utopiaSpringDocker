@@ -1,10 +1,10 @@
-package com.ss.utopia.api;
+package com.ss.utopia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiApplicationTests {
+class UtopiaApplicationTests {
 
 	@Test
 	void contextLoads() {
