@@ -24,7 +24,7 @@ public class UtopiaController {
 	UtopiaService utopiaService;
 	
 	// Reading a single book by its id
-	@GetMapping(path = "/airport/{BWI}",produces = { MediaType.APPLICATION_JSON_VALUE,
+	@GetMapping(path = "/airport/{airportCode}",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Airport> readAirportById(@PathVariable String airportCode, @RequestHeader MultiValueMap<String, String> header) {
 		Optional<Airport> airport = utopiaService.readAirportById(airportCode);

@@ -46,11 +46,11 @@ public class User implements Serializable{
 	@Column(name = "email")
 	private String email;
 	
-	@OneToMany(mappedBy = "booking")
+	@OneToMany(mappedBy = "user")
 	private Collection<Booking> bookings;
 
 	public User(Integer userId, CardInfo cardInfo, String userFirstName, String userLastName, String address,
-			String phone, String email, Collection<Booking> bookings) {
+			String phone, String email) {
 		super();
 		this.userId = userId;
 		this.cardInfo = cardInfo;
@@ -59,7 +59,6 @@ public class User implements Serializable{
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.bookings = bookings;
 	}
 
 	/**

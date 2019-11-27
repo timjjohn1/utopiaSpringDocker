@@ -29,22 +29,21 @@ public class FlightPath implements Serializable{
 	private Integer flightPathId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "airportCode", nullable = false)
+	@JoinColumn(name = "srcAirport", nullable = false)
 	private Airport srcAirport;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "airportCode", nullable = false)
+	@JoinColumn(name = "destAirport", nullable = false)
 	private Airport destAirport;
 
-	@OneToMany(mappedBy = "flight")
+	@OneToMany(mappedBy = "flightPath")
 	private Collection<Flight> flights;
 	
-	public FlightPath(Integer flightPathId, Airport srcAirport, Airport destAirport, Collection<Flight> flights) {
+	public FlightPath(Integer flightPathId, Airport srcAirport, Airport destAirport) {
 		super();
 		this.flightPathId = flightPathId;
 		this.srcAirport = srcAirport;
 		this.destAirport = destAirport;
-		this.flights = flights;
 	}
 
 	/**

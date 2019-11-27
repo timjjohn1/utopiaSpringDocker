@@ -45,11 +45,11 @@ public class Flight implements Serializable{
 	@JoinColumn(name = "flightPathId", nullable = false)
 	private FlightPath flightPath;
 	
-	@OneToMany(mappedBy = "ticket")
+	@OneToMany(mappedBy = "flight")
 	private Collection<Ticket> tickets;
-	
+
 	public Flight(Integer flightId, String plane, Timestamp arrivalTime, Timestamp departureTime, Integer totalSeats,
-			FlightPath flightPath, Collection<Ticket> tickets) {
+			FlightPath flightPath) {
 		super();
 		this.flightId = flightId;
 		this.plane = plane;
@@ -57,7 +57,6 @@ public class Flight implements Serializable{
 		this.departureTime = departureTime;
 		this.totalSeats = totalSeats;
 		this.flightPath = flightPath;
-		this.tickets = tickets;
 	}
 
 	/**
@@ -144,6 +143,27 @@ public class Flight implements Serializable{
 		this.flightPath = flightPath;
 	}
 
+	/**
+	 * @return the tickets
+	 */
+	public Collection<Ticket> getTickets() {
+		return tickets;
+	}
+
+	/**
+	 * @param tickets the tickets to set
+	 */
+	public void setTickets(Collection<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -204,6 +224,8 @@ public class Flight implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

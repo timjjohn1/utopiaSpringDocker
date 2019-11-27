@@ -1,7 +1,6 @@
 com/ss/utopia/entity/User.class
 com/ss/utopia/entity/Booking.class
 com/ss/utopia/dao/AirportDataAccess.class
-com/ss/utopia/entity/BookingCompositeKey.class
 com/ss/utopia/controller/UtopiaController.class
 com/ss/utopia/dao/FlightPathDataAccess.class
 com/ss/utopia/dao/TicketDataAccess.class

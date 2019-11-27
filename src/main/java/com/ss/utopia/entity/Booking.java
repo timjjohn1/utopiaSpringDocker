@@ -1,11 +1,17 @@
 package com.ss.utopia.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,110 +24,119 @@ public class Booking implements Serializable{
 	 */
 	private static final long serialVersionUID = -323939295581875645L;
 
-	@EmbeddedId
-    private BookingCompositeKey bookCopyKey;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "bookingId", updatable = false, unique = true, nullable = false)
+	private Integer bookingId;
 	
-	@Column(name = "airportCode")
-	private String airportCode;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", nullable = false)
+	private User user;
 	
-	@Column(name = "city")
-	private String city;
+	@Column(name = "isPaid")
+	private Integer isPaid;
 	
-	@Column(name = "zip")
-	private Integer zip;
+	@Column(name = "bookDate")
+	private Timestamp bookDate;
 	
-	@OneToMany(mappedBy = "user")
-	private Collection<User> users;
-
-	public Booking(BookingCompositeKey bookCopyKey, String airportCode, String city, Integer zip,
-			Collection<User> users) {
+	@OneToMany(mappedBy = "booking")
+	private Collection<Ticket> tickets;
+	
+	
+	public Booking(Integer bookingId, User user, Integer isPaid, Timestamp bookDate) {
 		super();
-		this.bookCopyKey = bookCopyKey;
-		this.airportCode = airportCode;
-		this.city = city;
-		this.zip = zip;
-		this.users = users;
+		this.bookingId = bookingId;
+		this.user = user;
+		this.isPaid = isPaid;
+		this.bookDate = bookDate;
 	}
 
 	/**
-	 * @return the bookCopyKey
+	 * @return the bookingId
 	 */
-	public BookingCompositeKey getBookCopyKey() {
-		return bookCopyKey;
+	public Integer getBookingId() {
+		return bookingId;
 	}
 
 	/**
-	 * @param bookCopyKey the bookCopyKey to set
+	 * @param bookingId the bookingId to set
 	 */
-	public void setBookCopyKey(BookingCompositeKey bookCopyKey) {
-		this.bookCopyKey = bookCopyKey;
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
 	}
 
 	/**
-	 * @return the airportCode
+	 * @return the user
 	 */
-	public String getAirportCode() {
-		return airportCode;
+	public User getUser() {
+		return user;
 	}
 
 	/**
-	 * @param airportCode the airportCode to set
+	 * @param user the user to set
 	 */
-	public void setAirportCode(String airportCode) {
-		this.airportCode = airportCode;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	/**
-	 * @return the city
+	 * @return the isPaid
 	 */
-	public String getCity() {
-		return city;
+	public Integer getIsPaid() {
+		return isPaid;
 	}
 
 	/**
-	 * @param city the city to set
+	 * @param isPaid the isPaid to set
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public void setIsPaid(Integer isPaid) {
+		this.isPaid = isPaid;
 	}
 
 	/**
-	 * @return the zip
+	 * @return the bookDate
 	 */
-	public Integer getZip() {
-		return zip;
+	public Timestamp getBookDate() {
+		return bookDate;
 	}
 
 	/**
-	 * @param zip the zip to set
+	 * @param bookDate the bookDate to set
 	 */
-	public void setZip(Integer zip) {
-		this.zip = zip;
+	public void setBookDate(Timestamp bookDate) {
+		this.bookDate = bookDate;
 	}
 
 	/**
-	 * @return the users
+	 * @return the tickets
 	 */
-	public Collection<User> getUsers() {
-		return users;
+	public Collection<Ticket> getTickets() {
+		return tickets;
 	}
 
 	/**
-	 * @param users the users to set
+	 * @param tickets the tickets to set
 	 */
-	public void setUsers(Collection<User> users) {
-		this.users = users;
+	public void setTickets(Collection<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((airportCode == null) ? 0 : airportCode.hashCode());
-		result = prime * result + ((bookCopyKey == null) ? 0 : bookCopyKey.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
-		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		result = prime * result + ((bookDate == null) ? 0 : bookDate.hashCode());
+		result = prime * result + ((bookingId == null) ? 0 : bookingId.hashCode());
+		result = prime * result + ((isPaid == null) ? 0 : isPaid.hashCode());
+		result = prime * result + ((tickets == null) ? 0 : tickets.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -134,30 +149,30 @@ public class Booking implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Booking other = (Booking) obj;
-		if (airportCode == null) {
-			if (other.airportCode != null)
+		if (bookDate == null) {
+			if (other.bookDate != null)
 				return false;
-		} else if (!airportCode.equals(other.airportCode))
+		} else if (!bookDate.equals(other.bookDate))
 			return false;
-		if (bookCopyKey == null) {
-			if (other.bookCopyKey != null)
+		if (bookingId == null) {
+			if (other.bookingId != null)
 				return false;
-		} else if (!bookCopyKey.equals(other.bookCopyKey))
+		} else if (!bookingId.equals(other.bookingId))
 			return false;
-		if (city == null) {
-			if (other.city != null)
+		if (isPaid == null) {
+			if (other.isPaid != null)
 				return false;
-		} else if (!city.equals(other.city))
+		} else if (!isPaid.equals(other.isPaid))
 			return false;
-		if (users == null) {
-			if (other.users != null)
+		if (tickets == null) {
+			if (other.tickets != null)
 				return false;
-		} else if (!users.equals(other.users))
+		} else if (!tickets.equals(other.tickets))
 			return false;
-		if (zip == null) {
-			if (other.zip != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!zip.equals(other.zip))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

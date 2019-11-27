@@ -16,17 +16,7 @@ import com.ss.utopia.entity.Airport;
 
 @Component
 public class UtopiaService {
-//
-//	private DataAccess<Book> bookDao = null;
-//	private DataAccess<LibraryBranch> libraryBranchDao = null;
-//	private DataAccess<BookCopy> bookCopyDao = null;
-//	
-//	public UserLibrarian(BookDataAccess bookDao, LibraryBranchDataAccess libraryBranchDao, BookCopyDataAccess bookCopyDao) {
-//		this.bookDao = bookDao;
-//		this.libraryBranchDao = libraryBranchDao;
-//		this.bookCopyDao = bookCopyDao;
-//	}
-//	
+
 	@Autowired
 	AirportDataAccess airportDao;
 
@@ -51,53 +41,5 @@ public class UtopiaService {
 	public Optional<Airport> readAirportById(String airportCode){
 		return airportDao.findById(airportCode);
 	}
-	
-//	public void createBookCopy(BookCopy bookCopy) {
-//		bookCopyDao.save(bookCopy);
-//	}
-//
-//	public Iterable<Book> readAllBooks() {
-//		return bookDao.findAll();
-//	}
-//	
-//	public Optional<Book> readBookById(Integer bookId) {
-//		return bookDao.findById(bookId);
-//	}
-//
-//	
-//	public Optional<LibraryBranch> readLibraryBranchById(Integer branchId) {
-//		return libraryBranchDao.findById(branchId);
-//	}
-//
-//	public Iterable<LibraryBranch> readAllLibraryBranches() {
-//
-//		return libraryBranchDao.findAll();
-//	}
-//	
-//	public Iterable<BookCopy> readAllBookCopies() {
-//		return bookCopyDao.findAll();
-//	}
-//	
-//	public Optional<BookCopy> readBookCopyById(BookCopyCompositeKey bookCopyId) {
-//		return bookCopyDao.findById(bookCopyId);
-//	}
-//
-//	
-//	public void updateLibraryBranch(LibraryBranch libraryBranch) {
-//		libraryBranchDao.save(libraryBranch);
-//
-//	}
-//
-//	
-//	public void updateBookCopy(BookCopy bookCopy) {
-//		bookCopyDao.save(bookCopy);
-//
-//	}
-//
-//	
-//	public void deleteBookCopy(BookCopyCompositeKey bookCopyId) {
-//		bookCopyDao.deleteById(bookCopyId);
-//
-//	}
 
 }

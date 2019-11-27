@@ -1,7 +1,6 @@
 package com.ss.utopia.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,18 +31,19 @@ public class Ticket implements Serializable{
 	@JoinColumn(name = "flightId", nullable = false)
 	private Flight flight;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "bookingId", nullable = false)
+	private Booking booking;
+	
 	@Column(name = "cost")
 	private float cost;
-	
-	@OneToMany(mappedBy = "booking")
-	private Collection<Booking> bookings;
-	
-	public Ticket(Integer ticketId, Flight flight, float cost, Collection<Booking> bookings) {
+
+	public Ticket(Integer ticketId, Flight flight, Booking booking, float cost) {
 		super();
 		this.ticketId = ticketId;
 		this.flight = flight;
+		this.booking = booking;
 		this.cost = cost;
-		this.bookings = bookings;
 	}
 
 	/**
@@ -75,6 +75,20 @@ public class Ticket implements Serializable{
 	}
 
 	/**
+	 * @return the booking
+	 */
+	public Booking getBooking() {
+		return booking;
+	}
+
+	/**
+	 * @param booking the booking to set
+	 */
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	/**
 	 * @return the cost
 	 */
 	public float getCost() {
@@ -88,45 +102,13 @@ public class Ticket implements Serializable{
 		this.cost = cost;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
-		result = prime * result + Float.floatToIntBits(cost);
-		result = prime * result + ((flight == null) ? 0 : flight.hashCode());
-		result = prime * result + ((ticketId == null) ? 0 : ticketId.hashCode());
-		return result;
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Ticket other = (Ticket) obj;
-		if (bookings == null) {
-			if (other.bookings != null)
-				return false;
-		} else if (!bookings.equals(other.bookings))
-			return false;
-		if (Float.floatToIntBits(cost) != Float.floatToIntBits(other.cost))
-			return false;
-		if (flight == null) {
-			if (other.flight != null)
-				return false;
-		} else if (!flight.equals(other.flight))
-			return false;
-		if (ticketId == null) {
-			if (other.ticketId != null)
-				return false;
-		} else if (!ticketId.equals(other.ticketId))
-			return false;
-		return true;
-	}
+	
 	
 	
 }

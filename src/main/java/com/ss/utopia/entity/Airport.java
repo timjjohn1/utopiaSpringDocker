@@ -24,9 +24,6 @@ public class Airport implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "airportCode", updatable = false, unique = true, nullable = false)
-	private String flightPathId;
-	
-	@Column(name = "airportCode")
 	private String airportCode;
 	
 	@Column(name = "city")
@@ -35,36 +32,19 @@ public class Airport implements Serializable{
 	@Column(name = "zip")
 	private Integer zip;
 	
-	@OneToMany(mappedBy = "srcAiport")
+	@OneToMany(mappedBy = "srcAirport")
 	private Collection<FlightPath> srcAirports;
 	
 	@OneToMany(mappedBy = "destAirport")
 	private Collection<FlightPath> destAirports;
 
-	public Airport(String flightPathId, String airportCode, String city, Integer zip,
-			Collection<FlightPath> srcAirports, Collection<FlightPath> destAirports) {
+	public Airport(String airportCode, String city, Integer zip) {
 		super();
-		this.flightPathId = flightPathId;
 		this.airportCode = airportCode;
 		this.city = city;
 		this.zip = zip;
-		this.srcAirports = srcAirports;
-		this.destAirports = destAirports;
 	}
 
-	/**
-	 * @return the flightPathId
-	 */
-	public String getFlightPathId() {
-		return flightPathId;
-	}
-
-	/**
-	 * @param flightPathId the flightPathId to set
-	 */
-	public void setFlightPathId(String flightPathId) {
-		this.flightPathId = flightPathId;
-	}
 
 	/**
 	 * @return the airportCode
@@ -136,6 +116,14 @@ public class Airport implements Serializable{
 		this.destAirports = destAirports;
 	}
 
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,11 +131,11 @@ public class Airport implements Serializable{
 		result = prime * result + ((airportCode == null) ? 0 : airportCode.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((destAirports == null) ? 0 : destAirports.hashCode());
-		result = prime * result + ((flightPathId == null) ? 0 : flightPathId.hashCode());
 		result = prime * result + ((srcAirports == null) ? 0 : srcAirports.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -173,11 +161,6 @@ public class Airport implements Serializable{
 				return false;
 		} else if (!destAirports.equals(other.destAirports))
 			return false;
-		if (flightPathId == null) {
-			if (other.flightPathId != null)
-				return false;
-		} else if (!flightPathId.equals(other.flightPathId))
-			return false;
 		if (srcAirports == null) {
 			if (other.srcAirports != null)
 				return false;
@@ -190,6 +173,7 @@ public class Airport implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
 	
 }
