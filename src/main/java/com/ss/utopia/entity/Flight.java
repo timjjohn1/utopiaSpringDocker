@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -33,10 +34,10 @@ public class Flight implements Serializable{
 	private String plane;
 	
 	@Column(name = "arrivalTime")
-	private Timestamp arrivalTime;
+	private Time arrivalTime;
 	
 	@Column(name = "departureTime")
-	private Timestamp departureTime;
+	private Time departureTime;
 	
 	@Column(name = "totalSeats")
 	private Integer totalSeats;
@@ -48,16 +49,7 @@ public class Flight implements Serializable{
 	@OneToMany(mappedBy = "flight")
 	private Collection<Ticket> tickets;
 
-	public Flight(Integer flightId, String plane, Timestamp arrivalTime, Timestamp departureTime, Integer totalSeats,
-			FlightPath flightPath) {
-		super();
-		this.flightId = flightId;
-		this.plane = plane;
-		this.arrivalTime = arrivalTime;
-		this.departureTime = departureTime;
-		this.totalSeats = totalSeats;
-		this.flightPath = flightPath;
-	}
+	public Flight() {}
 
 	/**
 	 * @return the flightId
@@ -90,28 +82,28 @@ public class Flight implements Serializable{
 	/**
 	 * @return the arrivalTime
 	 */
-	public Timestamp getArrivalTime() {
+	public Time getArrivalTime() {
 		return arrivalTime;
 	}
 
 	/**
 	 * @param arrivalTime the arrivalTime to set
 	 */
-	public void setArrivalTime(Timestamp arrivalTime) {
+	public void setArrivalTime(Time arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
 	/**
 	 * @return the departureTime
 	 */
-	public Timestamp getDepartureTime() {
+	public Time getDepartureTime() {
 		return departureTime;
 	}
 
 	/**
 	 * @param departureTime the departureTime to set
 	 */
-	public void setDepartureTime(Timestamp departureTime) {
+	public void setDepartureTime(Time departureTime) {
 		this.departureTime = departureTime;
 	}
 
@@ -141,20 +133,6 @@ public class Flight implements Serializable{
 	 */
 	public void setFlightPath(FlightPath flightPath) {
 		this.flightPath = flightPath;
-	}
-
-	/**
-	 * @return the tickets
-	 */
-	public Collection<Ticket> getTickets() {
-		return tickets;
-	}
-
-	/**
-	 * @param tickets the tickets to set
-	 */
-	public void setTickets(Collection<Ticket> tickets) {
-		this.tickets = tickets;
 	}
 
 	/**
@@ -224,9 +202,6 @@ public class Flight implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 	
 }

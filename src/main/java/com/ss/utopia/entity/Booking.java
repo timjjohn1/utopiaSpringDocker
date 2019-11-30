@@ -42,6 +42,7 @@ public class Booking implements Serializable{
 	@OneToMany(mappedBy = "booking")
 	private Collection<Ticket> tickets;
 	
+	public Booking() {}
 	
 	public Booking(Integer bookingId, User user, Integer isPaid, Timestamp bookDate) {
 		super();

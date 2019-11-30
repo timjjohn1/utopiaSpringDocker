@@ -1,6 +1,7 @@
 package com.ss.utopia.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,13 +38,33 @@ public class Ticket implements Serializable{
 	
 	@Column(name = "cost")
 	private float cost;
+	
+	@Column(name = "ticketDate")
+	private Date ticketDate;
 
-	public Ticket(Integer ticketId, Flight flight, Booking booking, float cost) {
+	public Ticket() {}
+	
+	public Ticket(Integer ticketId, Flight flight, Booking booking, float cost, Date ticketDate) {
 		super();
 		this.ticketId = ticketId;
 		this.flight = flight;
 		this.booking = booking;
 		this.cost = cost;
+		this.ticketDate = ticketDate;
+	}
+	
+	/**
+	 * @return the ticketDate
+	 */
+	public Date getTicketDate() {
+		return ticketDate;
+	}
+
+	/**
+	 * @param ticketDate the ticketDate to set
+	 */
+	public void setTicketDate(Date ticketDate) {
+		this.ticketDate = ticketDate;
 	}
 
 	/**

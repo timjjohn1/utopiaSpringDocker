@@ -26,17 +26,25 @@ public class Airport implements Serializable{
 	@Column(name = "airportCode", updatable = false, unique = true, nullable = false)
 	private String airportCode;
 	
+	@Column(name = "airportName")
+	private String airportName;
+	
 	@Column(name = "city")
 	private String city;
 	
 	@Column(name = "zip")
 	private Integer zip;
 	
-	@OneToMany(mappedBy = "srcAirport")
-	private Collection<FlightPath> srcAirports;
+//	@OneToMany(mappedBy = "srcAirport")
+//	private Collection<FlightPath> srcAirports;
+//	
+//	@OneToMany(mappedBy = "destAirport")
+//	private Collection<FlightPath> destAirports;
+
 	
-	@OneToMany(mappedBy = "destAirport")
-	private Collection<FlightPath> destAirports;
+	
+	public Airport() {}
+
 
 	public Airport(String airportCode, String city, Integer zip) {
 		super();
@@ -88,33 +96,22 @@ public class Airport implements Serializable{
 		this.zip = zip;
 	}
 
-	/**
-	 * @return the srcAirports
-	 */
-	public Collection<FlightPath> getSrcAirports() {
-		return srcAirports;
-	}
 
 	/**
-	 * @param srcAirports the srcAirports to set
+	 * @return the airportName
 	 */
-	public void setSrcAirports(Collection<FlightPath> srcAirports) {
-		this.srcAirports = srcAirports;
+	public String getAirportName() {
+		return airportName;
 	}
 
-	/**
-	 * @return the destAirports
-	 */
-	public Collection<FlightPath> getDestAirports() {
-		return destAirports;
-	}
 
 	/**
-	 * @param destAirports the destAirports to set
+	 * @param airportName the airportName to set
 	 */
-	public void setDestAirports(Collection<FlightPath> destAirports) {
-		this.destAirports = destAirports;
+	public void setAirportName(String airportName) {
+		this.airportName = airportName;
 	}
+
 
 	/**
 	 * @return the serialversionuid
@@ -129,9 +126,8 @@ public class Airport implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((airportCode == null) ? 0 : airportCode.hashCode());
+		result = prime * result + ((airportName == null) ? 0 : airportName.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((destAirports == null) ? 0 : destAirports.hashCode());
-		result = prime * result + ((srcAirports == null) ? 0 : srcAirports.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
@@ -151,20 +147,15 @@ public class Airport implements Serializable{
 				return false;
 		} else if (!airportCode.equals(other.airportCode))
 			return false;
+		if (airportName == null) {
+			if (other.airportName != null)
+				return false;
+		} else if (!airportName.equals(other.airportName))
+			return false;
 		if (city == null) {
 			if (other.city != null)
 				return false;
 		} else if (!city.equals(other.city))
-			return false;
-		if (destAirports == null) {
-			if (other.destAirports != null)
-				return false;
-		} else if (!destAirports.equals(other.destAirports))
-			return false;
-		if (srcAirports == null) {
-			if (other.srcAirports != null)
-				return false;
-		} else if (!srcAirports.equals(other.srcAirports))
 			return false;
 		if (zip == null) {
 			if (other.zip != null)
@@ -173,6 +164,8 @@ public class Airport implements Serializable{
 			return false;
 		return true;
 	}
+
+
 
 
 	

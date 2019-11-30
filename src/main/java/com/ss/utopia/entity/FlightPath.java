@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name = "fligthPath", schema = "utopia")
+@Table(name = "flightPath", schema = "utopia")
 public class FlightPath implements Serializable{
 
 	/**
@@ -38,6 +38,8 @@ public class FlightPath implements Serializable{
 
 	@OneToMany(mappedBy = "flightPath")
 	private Collection<Flight> flights;
+	
+	public FlightPath() {}
 	
 	public FlightPath(Integer flightPathId, Airport srcAirport, Airport destAirport) {
 		super();

@@ -49,6 +49,8 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user")
 	private Collection<Booking> bookings;
 
+	public User() {}
+	
 	public User(Integer userId, CardInfo cardInfo, String userFirstName, String userLastName, String address,
 			String phone, String email) {
 		super();

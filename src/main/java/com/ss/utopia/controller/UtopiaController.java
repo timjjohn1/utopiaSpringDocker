@@ -34,4 +34,23 @@ public class UtopiaController {
 		return new ResponseEntity<Airport>(airport.get(), HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/flightPath/{flightPathId}",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<FlightPath> readAirportById(@PathVariable Integer flightPathId, @RequestHeader MultiValueMap<String, String> header) {
+		Optional<FlightPath> flightPath = utopiaService.readFlightPathById(flightPathId);
+		if (!flightPath.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<FlightPath>(flightPath.get(), HttpStatus.OK);
+	}
+
+	/*
+	
+	
+			User Mappings
+	
+	
+	*/
+	
+	//ge
 }
