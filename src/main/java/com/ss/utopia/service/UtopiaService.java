@@ -47,4 +47,7 @@ public class UtopiaService {
 		return flightPathDao.findById(flightPathId);
 	}
 	
+	public Optional<Booking> readBookingById(Integer bookingId){
+		return bookingDao.findById(bookingId);
+	}
 }
