@@ -1,5 +1,6 @@
 package com.ss.utopia.service;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,15 @@ import org.springframework.stereotype.Component;
 
 import com.ss.utopia.dao.AirportDataAccess;
 import com.ss.utopia.dao.BookingDataAccess;
-import com.ss.utopia.dao.CardInfoDataAccess;
 import com.ss.utopia.dao.FlightDataAccess;
 import com.ss.utopia.dao.FlightPathDataAccess;
 import com.ss.utopia.dao.TicketDataAccess;
 import com.ss.utopia.dao.UserDataAccess;
 import com.ss.utopia.entity.Airport;
 import com.ss.utopia.entity.Booking;
+import com.ss.utopia.entity.Flight;
 import com.ss.utopia.entity.FlightPath;
+import com.ss.utopia.entity.Ticket;
 
 @Component
 public class UtopiaService {
@@ -24,9 +26,6 @@ public class UtopiaService {
 
 	@Autowired
 	BookingDataAccess bookingDao;
-
-	@Autowired
-	CardInfoDataAccess cardInfoDao;
 	
 	@Autowired
 	FlightDataAccess flightDao;
@@ -51,4 +50,18 @@ public class UtopiaService {
 	public Optional<Booking> readBookingById(Integer bookingId){
 		return bookingDao.findById(bookingId);
 	}
+	
+	public Optional<Flight> readFlightById(Integer flightId){
+		return flightDao.findById(flightId);
+	}
+	
+	public Optional<Ticket> readTicketById(Integer ticketId){
+		return ticketDao.findById(ticketId);
+	}
+	
+	public Optional<Ticket> createTicket(Ticket ticket){
+		ticket = ticketDao.save(ticket);
+		return ticketDao.findById(ticket.getTicketId());
+	}
+	
 }

@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 @Table(name = "booking", schema = "utopia")
 public class Booking implements Serializable{
@@ -40,6 +44,7 @@ public class Booking implements Serializable{
 	private Timestamp bookDate;
 	
 	@OneToMany(mappedBy = "booking")
+	@JsonIgnore
 	private Collection<Ticket> tickets;
 	
 	public Booking() {}
@@ -50,6 +55,13 @@ public class Booking implements Serializable{
 		this.user = user;
 		this.isPaid = isPaid;
 		this.bookDate = bookDate;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Booking [bookingId=" + bookingId + ", user=" + user + ", isPaid=" + isPaid + ", bookDate=" + bookDate
+				+ "]";
 	}
 
 	/**

@@ -14,8 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
-@Table(name = "cardInfo", schema = "utopia")
+@Table(name = "user", schema = "utopia")
 public class User implements Serializable{
 	/**
 	 * 
@@ -26,10 +30,6 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userId", updatable = false, unique = true, nullable = false)
 	private Integer userId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cardInfo", nullable = false)
-	private CardInfo cardInfo;
 	
 	@Column(name = "userFirstName")
 	private String userFirstName;
@@ -47,15 +47,14 @@ public class User implements Serializable{
 	private String email;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private Collection<Booking> bookings;
 
 	public User() {}
-	
-	public User(Integer userId, CardInfo cardInfo, String userFirstName, String userLastName, String address,
-			String phone, String email) {
+
+	public User(Integer userId, String userFirstName, String userLastName, String address, String phone, String email) {
 		super();
 		this.userId = userId;
-		this.cardInfo = cardInfo;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.address = address;
@@ -75,20 +74,6 @@ public class User implements Serializable{
 	 */
 	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
-
-	/**
-	 * @return the cardInfo
-	 */
-	public CardInfo getCardInfo() {
-		return cardInfo;
-	}
-
-	/**
-	 * @param cardInfo the cardInfo to set
-	 */
-	public void setCardInfo(CardInfo cardInfo) {
-		this.cardInfo = cardInfo;
 	}
 
 	/**
@@ -175,13 +160,19 @@ public class User implements Serializable{
 		this.bookings = bookings;
 	}
 
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((bookings == null) ? 0 : bookings.hashCode());
-		result = prime * result + ((cardInfo == null) ? 0 : cardInfo.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
@@ -209,11 +200,6 @@ public class User implements Serializable{
 				return false;
 		} else if (!bookings.equals(other.bookings))
 			return false;
-		if (cardInfo == null) {
-			if (other.cardInfo != null)
-				return false;
-		} else if (!cardInfo.equals(other.cardInfo))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -240,8 +226,8 @@ public class User implements Serializable{
 		} else if (!userLastName.equals(other.userLastName))
 			return false;
 		return true;
-	}	
-
+	}
+	
 
 	
 }

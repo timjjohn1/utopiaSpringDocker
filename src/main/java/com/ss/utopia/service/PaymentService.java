@@ -45,6 +45,7 @@ public class PaymentService {
         chargeParams.put("currency", "USD");
         chargeParams.put("source", tok.getId());
         Charge charge = Charge.create(chargeParams);
+        System.out.println("This is the charge: " + charge.toString());
         return charge;
     }
 

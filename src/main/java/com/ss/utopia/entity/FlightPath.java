@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 @Table(name = "flightPath", schema = "utopia")
 public class FlightPath implements Serializable{
@@ -37,6 +39,7 @@ public class FlightPath implements Serializable{
 	private Airport destAirport;
 
 	@OneToMany(mappedBy = "flightPath")
+	@JsonIgnore
 	private Collection<Flight> flights;
 	
 	public FlightPath() {}

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity 
 @Table(name = "airport", schema = "utopia")
 public class Airport implements Serializable{

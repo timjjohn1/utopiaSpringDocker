@@ -53,6 +53,14 @@ public class Ticket implements Serializable{
 		this.ticketDate = ticketDate;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Ticket [ticketId=" + ticketId + ", flight=" + flight.toString() + ", booking=" + booking.toString() + ", cost=" + cost
+				+ ", ticketDate=" + ticketDate + "]";
+	}
+
 	/**
 	 * @return the ticketDate
 	 */
