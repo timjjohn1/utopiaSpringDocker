@@ -13,6 +13,7 @@ import com.ss.utopia.dao.FlightPathDataAccess;
 import com.ss.utopia.dao.TicketDataAccess;
 import com.ss.utopia.dao.UserDataAccess;
 import com.ss.utopia.entity.Airport;
+import com.ss.utopia.entity.Booking;
 import com.ss.utopia.entity.FlightPath;
 
 @Component
