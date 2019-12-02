@@ -23,6 +23,12 @@ public class UtopiaController {
 	@Autowired
 	UtopiaService utopiaService;
 	
+	@GetMapping(path = "/",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Object> readAirportById() {
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	// Reading a single book by its id
 	@GetMapping(path = "/airport/{airportCode}",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
