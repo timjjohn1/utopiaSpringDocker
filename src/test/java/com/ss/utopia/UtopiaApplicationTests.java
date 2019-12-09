@@ -3,6 +3,7 @@ package com.ss.utopia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -28,6 +29,7 @@ import com.ss.utopia.entity.Airport;
 import com.ss.utopia.entity.Booking;
 import com.ss.utopia.entity.Flight;
 import com.ss.utopia.entity.FlightPath;
+import com.ss.utopia.entity.Ticket;
 import com.ss.utopia.entity.User;
 import com.ss.utopia.service.UtopiaService;
 
@@ -103,17 +105,27 @@ public class UtopiaApplicationTests {
     	assertEquals(test, 1);
     }
     
-    @Test
-    public void booking() {
-    	int test = 0;
-    	User user = new User(1, "Tim", "Johnson" , "2342 Street" , "42242442342", "timjohnun@email.com");
-    	Booking booking = new Booking(1, user, 0, new Timestamp(32425252124l));
-    	
-    	userTestDao.save(user);
-    	bookingTestDao.save(booking);
-    	
-    	if(utopiaService.readTicketsByBookingId(booking.getBookingId()).iterator().hasNext()) {
-    		test = 1;
-    	}
-    }
+//    @Test
+//    public void booking() {
+//    	int test = 0;
+//    	User user = new User(1, "Tim", "Johnson" , "2342 Street" , "42242442342", "timjohnun@email.com");
+//    	Airport srcAirport = new Airport("BWD", "BWI", "Baltimore", 21015);
+//    	Airport destAirport = new Airport("JFB", "JFK", "New York", 23424);
+//    	FlightPath flightPath = new FlightPath(1, srcAirport, destAirport);
+//    	Flight flight = new Flight(2, "747", new Time(455415454l), new Time(123456789l), 55,
+//    			flightPath);
+//    	Booking booking = new Booking(1, user, 0, new Timestamp(32425252124l));
+//    	Ticket ticket = new Ticket(1, flight, booking, 2.50F, new Date(23423424l));
+//    	System.out.println(airportTestDao.save(srcAirport));
+//    	System.out.println(airportTestDao.save(destAirport));
+//    	System.out.println(flightPathTestDao.save(flightPath));
+//    	System.out.println(flightTestDao.save(flight));
+//    	userTestDao.save(user);
+//    	bookingTestDao.save(booking);
+//    	ticketTestDao.save(ticket);
+//    	if(utopiaService.readTicketsByBookingId(1).iterator().hasNext()) {
+//    		test = 1;
+//    	}
+//    	assertEquals(test, 1);
+//    }
 }

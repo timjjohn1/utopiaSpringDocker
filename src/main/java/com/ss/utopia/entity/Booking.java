@@ -148,7 +148,6 @@ public class Booking implements Serializable{
 		result = prime * result + ((bookDate == null) ? 0 : bookDate.hashCode());
 		result = prime * result + ((bookingId == null) ? 0 : bookingId.hashCode());
 		result = prime * result + ((isPaid == null) ? 0 : isPaid.hashCode());
-		result = prime * result + ((tickets == null) ? 0 : tickets.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -177,11 +176,6 @@ public class Booking implements Serializable{
 				return false;
 		} else if (!isPaid.equals(other.isPaid))
 			return false;
-		if (tickets == null) {
-			if (other.tickets != null)
-				return false;
-		} else if (!tickets.equals(other.tickets))
-			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
@@ -189,6 +183,8 @@ public class Booking implements Serializable{
 			return false;
 		return true;
 	}
+
+
 	
 	
 	
