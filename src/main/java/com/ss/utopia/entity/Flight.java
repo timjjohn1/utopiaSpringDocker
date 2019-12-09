@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -27,7 +29,7 @@ public class Flight implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "flightId", updatable = false, unique = true, nullable = false)
+	@Column(name = "flightId", updatable = false, unique = true)
 	private Integer flightId;
 	
 	@Column(name = "plane")
@@ -47,9 +49,31 @@ public class Flight implements Serializable{
 	private FlightPath flightPath;
 	
 	@OneToMany(mappedBy = "flight")
+	@JsonIgnore
 	private Collection<Ticket> tickets;
 
 	public Flight() {}
+	
+	public Flight(Integer flightId, String plane, Time arrivalTime, Time departureTime, Integer totalSeats,
+			FlightPath flightPath) {
+		super();
+		this.flightId = flightId;
+		this.plane = plane;
+		this.arrivalTime = arrivalTime;
+		this.departureTime = departureTime;
+		this.totalSeats = totalSeats;
+		this.flightPath = flightPath;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Flight [flightId=" + flightId + ", plane=" + plane + ", arrivalTime=" + arrivalTime + ", departureTime="
+				+ departureTime + ", totalSeats=" + totalSeats + ", flightPath=" + flightPath + ", tickets=" + "]";
+	}
+
+
 
 	/**
 	 * @return the flightId
