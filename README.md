@@ -1,4 +1,4 @@
-# utopiaSpringDocker
+# Dockerized Spring API
 Spring Boot API
 Works with publicly available Stripe API for payments.  Receives tokens from front end react. Sends back a success or failure to the front end.
 Used different REST API end points to retrieve data from the database to get information for the front end.
