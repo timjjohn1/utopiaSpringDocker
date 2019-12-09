@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 @Table(name = "flightPath", schema = "utopia")
 public class FlightPath implements Serializable{
@@ -25,7 +27,7 @@ public class FlightPath implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "flightPathId", updatable = false, unique = true, nullable = false)
+	@Column(name = "flightPathId", updatable = false, unique = true)
 	private Integer flightPathId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -37,6 +39,7 @@ public class FlightPath implements Serializable{
 	private Airport destAirport;
 
 	@OneToMany(mappedBy = "flightPath")
+	@JsonIgnore
 	private Collection<Flight> flights;
 	
 	public FlightPath() {}
@@ -88,6 +91,14 @@ public class FlightPath implements Serializable{
 	 */
 	public void setDestAirport(Airport destAirport) {
 		this.destAirport = destAirport;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "FlightPath [flightPathId=" + flightPathId + ", srcAirport=" + srcAirport + ", destAirport="
+				+ destAirport + "]";
 	}
 
 	@Override
