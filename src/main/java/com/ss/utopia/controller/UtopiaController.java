@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.ss.utopia.service.UtopiaService;
 
 @RestController
 @RequestMapping(path = "/utopia")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UtopiaController {
 	@Autowired
 	UtopiaService utopiaService;
@@ -82,6 +84,16 @@ public class UtopiaController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Ticket>(ticket.get(), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/tickets/{bookingId}",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Iterable<Ticket>> readTicketByBookingId(@PathVariable Integer bookingId, @RequestHeader MultiValueMap<String, String> header) {
+		Iterable<Ticket> tickets = utopiaService.readTicketsByBookingId(bookingId);
+		if (!tickets.iterator().hasNext()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Iterable<Ticket>>(tickets, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/ticket",consumes = {"application/xml", "application/json"},

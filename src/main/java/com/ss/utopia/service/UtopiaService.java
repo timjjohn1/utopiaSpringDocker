@@ -1,6 +1,7 @@
 package com.ss.utopia.service;
 
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,12 @@ public class UtopiaService {
 	UserDataAccess userDao;
 
 	public Optional<Airport> readAirportById(String airportCode){
+		System.out.println("\n\nReading airport: " + airportCode + "  -  " + airportDao.findById(airportCode));
 		return airportDao.findById(airportCode);
+	}
+	
+	public Iterable<Airport> readAllAirports(){
+		return airportDao.findAll();
 	}
 
 	public Optional<FlightPath> readFlightPathById(Integer flightPathId){
@@ -62,6 +68,16 @@ public class UtopiaService {
 	public Optional<Ticket> createTicket(Ticket ticket){
 		ticket = ticketDao.save(ticket);
 		return ticketDao.findById(ticket.getTicketId());
+	}
+	
+	public Optional<Airport> createAirport(Airport airport){
+		airport = airportDao.save(airport);
+		System.out.println("\n\nCreating airport: " + airport.toString());
+		return airportDao.findById(airport.getAirportCode());
+	}
+	
+	public Iterable<Ticket> readTicketsByBookingId(Integer bookingId){
+		return bookingDao.findById(bookingId).get().getTickets();
 	}
 	
 }

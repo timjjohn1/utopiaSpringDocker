@@ -21,7 +21,6 @@ public class Airport implements Serializable{
 	private static final long serialVersionUID = -8325930518684136263L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "airportCode", updatable = false, unique = true, nullable = false)
 	private String airportCode;
 	
@@ -45,9 +44,10 @@ public class Airport implements Serializable{
 	public Airport() {}
 
 
-	public Airport(String airportCode, String city, Integer zip) {
+	public Airport(String airportCode, String airportName, String city, Integer zip) {
 		super();
 		this.airportCode = airportCode;
+		this.airportName = airportName;
 		this.city = city;
 		this.zip = zip;
 	}
@@ -67,6 +67,8 @@ public class Airport implements Serializable{
 		this.airportCode = airportCode;
 	}
 
+	
+	
 	/**
 	 * @return the city
 	 */
@@ -117,6 +119,14 @@ public class Airport implements Serializable{
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "Airport [airportCode=" + airportCode + ", airportName=" + airportName + ", city=" + city + ", zip="
+				+ zip + "]";
 	}
 
 

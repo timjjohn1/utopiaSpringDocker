@@ -29,7 +29,7 @@ public class Flight implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "flightId", updatable = false, unique = true, nullable = false)
+	@Column(name = "flightId", updatable = false, unique = true)
 	private Integer flightId;
 	
 	@Column(name = "plane")
@@ -62,6 +62,7 @@ public class Flight implements Serializable{
 		this.arrivalTime = arrivalTime;
 		this.departureTime = departureTime;
 		this.totalSeats = totalSeats;
+		this.flightPath = flightPath;
 	}
 
 
