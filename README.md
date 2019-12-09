@@ -7,4 +7,9 @@ Unit Testing -
 Uses an H2 database to build based off of the ORM built in to spring. 
 
 Dockerized - 
+<<<<<<< HEAD
 In order to be deployed onto an AWS stack I copied the jar into a docker container to be run remotely from an ECR to and EC2.
+=======
+In order to be deployed onto an AWS stack I copied the jar into a docker container to be run remotely from an ECR to and EC2.
+
+>>>>>>> 2b9511b3c4a15a0c97ad8724ac117e2d99f32738
