@@ -8,3 +8,4 @@ Uses an H2 database to build based off of the ORM built in to spring.
 
 Dockerized - 
 In order to be deployed onto an AWS stack I copied the jar into a docker container to be run remotely from an ECR to and EC2.
+
