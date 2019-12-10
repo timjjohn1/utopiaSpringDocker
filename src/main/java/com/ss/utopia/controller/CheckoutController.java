@@ -10,7 +10,7 @@ import com.ss.utopia.entity.ChargeRequest;
 @Controller
 public class CheckoutController {
  
-    @Value("${STRIPE_PUBLIC_KEY}")
+    @Value("${STRIPE_PUB_KEY}")
     private String stripePublicKey;
  
     @RequestMapping("/checkout")
