@@ -16,7 +16,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.ss.utopia.dao.AirportDataAccess;
@@ -36,6 +38,7 @@ import com.ss.utopia.service.UtopiaService;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @EnableAutoConfiguration
+@TestPropertySource(locations="classpath:application-default.properties")
 public class UtopiaApplicationTests {
 	
 	@Resource
