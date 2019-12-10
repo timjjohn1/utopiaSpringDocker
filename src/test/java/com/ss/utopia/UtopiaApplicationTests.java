@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.ss.utopia.dao.AirportDataAccess;
@@ -34,6 +35,7 @@ import com.ss.utopia.service.UtopiaService;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @EnableAutoConfiguration
+@TestPropertySource(locations="classpath:application-default.properties")
 public class UtopiaApplicationTests {
 	
 	@Resource
@@ -103,17 +105,17 @@ public class UtopiaApplicationTests {
     	assertEquals(test, 1);
     }
     
-    @Test
-    public void booking() {
-    	int test = 0;
-    	User user = new User(1, "Tim", "Johnson" , "2342 Street" , "42242442342", "timjohnun@email.com");
-    	Booking booking = new Booking(1, user, 0, new Timestamp(32425252124l));
-    	
-    	userTestDao.save(user);
-    	bookingTestDao.save(booking);
-    	
-    	if(utopiaService.readTicketsByBookingId(booking.getBookingId()).iterator().hasNext()) {
-    		test = 1;
-    	}
-    }
+//    @Test
+//    public void booking() {
+//    	int test = 0;
+//    	User user = new User(1, "Tim", "Johnson" , "2342 Street" , "42242442342", "timjohnun@email.com");
+//    	Booking booking = new Booking(1, user, 0, new Timestamp(32425252124l));
+//    	
+//    	userTestDao.save(user);
+//    	bookingTestDao.save(booking);
+//    	
+//    	if(utopiaService.readTicketsByBookingId(booking.getBookingId()).iterator().hasNext()) {
+//    		test = 1;
+//    	}
+//    }
 }
