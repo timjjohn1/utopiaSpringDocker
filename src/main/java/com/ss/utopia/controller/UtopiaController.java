@@ -33,6 +33,12 @@ public class UtopiaController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/health",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Object> readAirportById() {
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	// Reading a single booking by its id
 	@GetMapping(path = "/booking/{bookingId}",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
