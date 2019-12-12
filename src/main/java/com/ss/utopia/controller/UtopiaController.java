@@ -35,7 +35,7 @@ public class UtopiaController {
 	
 	@GetMapping(path = "/health",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> health() {
+	public ResponseEntity<Object> healthy() {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
