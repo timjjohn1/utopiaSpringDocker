@@ -22,7 +22,7 @@ import com.ss.utopia.service.UtopiaService;
 
 @RestController
 @RequestMapping(path = "/utopia")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class UtopiaController {
 	@Autowired
 	UtopiaService utopiaService;
