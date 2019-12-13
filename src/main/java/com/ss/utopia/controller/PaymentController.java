@@ -25,7 +25,7 @@ public class PaymentController {
 	}
 
 	@PostMapping("/charge")
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin
 	public Charge chargeCard(HttpServletRequest request) throws Exception {
 //		System.out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 //		System.out.println(request.getHeader("application/json"));
