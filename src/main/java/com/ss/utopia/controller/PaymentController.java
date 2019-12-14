@@ -27,7 +27,7 @@ public class PaymentController {
 	@PostMapping("/charge")
 	@CrossOrigin
 	public Charge chargeCard(HttpServletRequest request) throws Exception {
-//		System.out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+		System.out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 //		System.out.println(request.getHeader("application/json"));
 //		// System.out.println(request.getHeader("email"));
 		String token = request.getHeader("token").toString();
