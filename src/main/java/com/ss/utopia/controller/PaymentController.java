@@ -27,11 +27,19 @@ public class PaymentController {
 	@PostMapping("/charge")
 	@CrossOrigin
 	public Charge chargeCard(HttpServletRequest request) throws Exception {
-		System.out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String headerName = headerNames.nextElement();
+			System.out.print("Header Name: <em>" + headerName);
+			String headerValue = request.getHeader(headerName);
+			System.out.print("</em>, Header Value: <em>" + headerValue);
+			System.out.println("</em><br/>");
+		}
+		System.out.println("request" + request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 //		System.out.println(request.getHeader("application/json"));
 //		// System.out.println(request.getHeader("email"));
-		String token = request.getHeader("token").toString();
-		System.out.println(token);
+		String token = request.getParameter("token");
+		System.out.println("token" + token);
 		Double amount = Double.parseDouble(request.getHeader("amount"));
 		System.out.println();
 		System.out.println();
