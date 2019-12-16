@@ -1,7 +1,9 @@
 package com.ss.utopia.service;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,4 +82,29 @@ public class UtopiaService {
 		return bookingDao.findById(bookingId).get().getTickets();
 	}
 	
+	public Iterable<Ticket> readTicketsByUserId(Integer userId){
+		Date date = new Date();
+		Iterable<Booking> bookings = userDao.findById(userId).get().getBookings();
+		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+		bookings.forEach((booking) -> {
+								booking.getTickets().forEach(ticket -> {
+											if(ticket.getTicketDate().after(date)) {
+												tickets.add(ticket);
+											}
+										});
+									  });
+									  
+		return tickets;
+	}
+	
+	public Iterable<Booking> readBookingsByUserId(Integer userId){
+		return userDao.findById(userId).get().getBookings();
+	}
+	
+	public Booking updateBookingIsPaid(Integer bookingId) {
+		Optional<Booking> booking = bookingDao.findById(bookingId);
+		System.out.println("BOoking: " + booking.get());
+		booking.get().setIsPaid(1);
+		return bookingDao.save(booking.get());
+	}
 }

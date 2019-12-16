@@ -1,5 +1,6 @@
 package com.ss.utopia.controller;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -121,5 +123,37 @@ public class UtopiaController {
 		return new ResponseEntity<Ticket>(ticket, HttpStatus.CREATED);
 		// Code 201
 	}
+	
+	@GetMapping(path = "/booking/user/{userId}",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Iterable<Booking>> readBookingsByUserId(@PathVariable Integer userId, @RequestHeader MultiValueMap<String, String> header) {
+		Iterable<Booking> bookings = utopiaService.readBookingsByUserId(userId);
+		if (!bookings.iterator().hasNext()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Iterable<Booking>>(bookings, HttpStatus.OK);
+	}
 
+	@GetMapping(path = "/tickets/user/{userId}",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Iterable<Ticket>> readTicketsByUserId(@PathVariable Integer userId, @RequestHeader MultiValueMap<String, String> header) {
+		Iterable<Ticket> tickets = utopiaService.readTicketsByUserId(userId);
+		if (!tickets.iterator().hasNext()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Iterable<Ticket>>(tickets, HttpStatus.OK);
+	}
+	
+	@PutMapping(path = "booking/paid",produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Booking> updateBookingIsPaid(@RequestHeader(value ="bookingID") Integer bookingId) {
+		if(bookingId == null || utopiaService.readBookingById(bookingId).get().getIsPaid() == 1){
+			return new ResponseEntity<Booking>(new Booking(),HttpStatus.BAD_REQUEST);
+		}
+		if(!utopiaService.readBookingById(bookingId).isPresent()) {
+			return new ResponseEntity<Booking>(new Booking(),HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Booking>(utopiaService.updateBookingIsPaid(bookingId),HttpStatus.OK);
+	}
+	
 }
