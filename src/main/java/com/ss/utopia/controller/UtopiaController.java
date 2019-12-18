@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -124,7 +125,8 @@ public class UtopiaController {
 		// Code 201
 	}
 	
-	@GetMapping(path = "/booking/user/{userId}",produces = { MediaType.APPLICATION_JSON_VALUE,
+	//multiple bookings according to userId
+	@GetMapping(path = "/bookings/user/{userId}",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Iterable<Booking>> readBookingsByUserId(@PathVariable Integer userId, @RequestHeader MultiValueMap<String, String> header) {
 		Iterable<Booking> bookings = utopiaService.readBookingsByUserId(userId);
@@ -134,6 +136,7 @@ public class UtopiaController {
 		return new ResponseEntity<Iterable<Booking>>(bookings, HttpStatus.OK);
 	}
 
+	//multiple tickets according to userId
 	@GetMapping(path = "/tickets/user/{userId}",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Iterable<Ticket>> readTicketsByUserId(@PathVariable Integer userId, @RequestHeader MultiValueMap<String, String> header) {
@@ -144,6 +147,7 @@ public class UtopiaController {
 		return new ResponseEntity<Iterable<Ticket>>(tickets, HttpStatus.OK);
 	}
 	
+	//Flip paid switch
 	@PutMapping(path = "booking/paid",produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Booking> updateBookingIsPaid(@RequestHeader(value ="bookingID") Integer bookingId) {
@@ -154,6 +158,26 @@ public class UtopiaController {
 			return new ResponseEntity<Booking>(new Booking(),HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Booking>(utopiaService.updateBookingIsPaid(bookingId),HttpStatus.OK);
+	}
+	
+	
+	//DELETES
+	@DeleteMapping(value = "/booking/{bookingId}")
+	public ResponseEntity<HttpStatus> deleteBookingById(@PathVariable Integer bookingId) {
+		if(!utopiaService.readBookingById(bookingId).isPresent()) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+		}
+		utopiaService.deleteBookingById(bookingId);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+	}
+	
+	@DeleteMapping(value = "/ticket/{ticketId}")
+	public ResponseEntity<HttpStatus> deleteTicketById(@PathVariable Integer ticketId) {
+		if(!utopiaService.readTicketById(ticketId).isPresent()) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+		}
+		utopiaService.deleteTicketById(ticketId);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 	
 }
