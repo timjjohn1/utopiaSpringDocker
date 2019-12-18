@@ -107,4 +107,12 @@ public class UtopiaService {
 		booking.get().setIsPaid(1);
 		return bookingDao.save(booking.get());
 	}
+	
+	public void deleteBookingById(Integer bookingId) {
+		bookingDao.deleteById(bookingId);
+	}
+	
+	public void deleteTicketById(Integer ticketId) {
+		ticketDao.deleteById(ticketId);
+	}
 }
